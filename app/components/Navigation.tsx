@@ -14,7 +14,7 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="w-64 bg-black border-r border-gray-200 p-4">
+    <nav className="w-64 bg-gray-900 border-r border-gray-700/50 p-4">
       <div className="space-y-1">
         {navigationItems.map((item) => {
           const isActive = pathname === item.path;
@@ -22,10 +22,10 @@ const Navigation = () => {
             <Link
               key={item.path}
               href={item.path}
-              className={`block px-3 py-2 rounded-md text-sm font-bold text-white ${
+              className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 ${
                 isActive
-                  ? "bg-gray-200 text-gray-900"
-                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                  ? "bg-gray-800 text-emerald-400 border border-emerald-500/20"
+                  : "text-gray-300 hover:bg-gray-800/50 hover:text-emerald-300"
               }`}
             >
               {item.name}
