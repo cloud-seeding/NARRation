@@ -2,15 +2,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { NARRData } from "../types";
 
 interface StatsDisplayProps {
-  data: {
-    metadata: {
-      variables_processed: string[];
-      created: string;
-    };
-    variables: Record<string, any>;
-  };
+  data: NARRData;
 }
 
 export default function StatsDisplay({ data }: StatsDisplayProps) {
@@ -21,7 +16,7 @@ export default function StatsDisplay({ data }: StatsDisplayProps) {
       setSelectedVariable(data.metadata.variables_processed[0]);
     }
 
-    const handleVariableChange = (event: CustomEvent) => {
+    const handleVariableChange = (event: CustomEvent<string>) => {
       setSelectedVariable(event.detail);
     };
 
@@ -35,7 +30,7 @@ export default function StatsDisplay({ data }: StatsDisplayProps) {
         handleVariableChange as EventListener
       );
     };
-  }, [data.metadata.variables_processed]);
+  }, [data.metadata.variables_processed, selectedVariable]);
 
   const startDate = new Date("1979-01-01");
   const endDate = new Date("2024-01-01");

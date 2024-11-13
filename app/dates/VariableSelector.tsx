@@ -2,10 +2,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { NARRData } from "../types";
 
 interface VariableSelectorProps {
   variables: string[];
-  data: any;
+  data: NARRData;
 }
 
 export default function VariableSelector({
@@ -17,14 +18,15 @@ export default function VariableSelector({
     if (variables.length > 0 && !selectedVariable) {
       setSelectedVariable(variables[0]);
     }
-  }, [variables]);
+  }, [variables, selectedVariable]);
 
   const handleVariableChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSelectedVariable(event.target.value);
+    const newValue = event.target.value;
+    setSelectedVariable(newValue);
     const customEvent = new CustomEvent("variableChange", {
-      detail: event.target.value,
+      detail: newValue,
     });
     window.dispatchEvent(customEvent);
   };
